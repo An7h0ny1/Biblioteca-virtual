@@ -1,0 +1,30 @@
+services:
+  mysql:
+    container_name: mysql-bv
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD:
+      MYSQLDATA: /var/lib/mysql/data
+      MYSQL_DATABASE: bv
+    volumes:
+      - mysql:/data/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - spring-network
+    restart: unless-stopped
+  mail-dev:
+    container_name: mail-dev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+networks:
+  spring-network:
+    driver: bridge
+
+volumes:
+  mysql:
+    driver: local
