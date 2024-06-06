@@ -1,6 +1,7 @@
 package com.anthony.biblioteca_virtual.role;
 
 import com.anthony.biblioteca_virtual.User.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -29,6 +30,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private List<User > users;
 
     @CreatedDate
