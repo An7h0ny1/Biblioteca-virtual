@@ -1,5 +1,6 @@
 package com.anthony.biblioteca_virtual.User;
 
+import com.anthony.biblioteca_virtual.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,6 +13,8 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -42,6 +45,9 @@ public class User implements UserDetails, Principal {
 
     private boolean accountLocked;
     private boolean enabled;
+
+    @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
+    private List<Role> roles;
 
 
     @CreatedDate
