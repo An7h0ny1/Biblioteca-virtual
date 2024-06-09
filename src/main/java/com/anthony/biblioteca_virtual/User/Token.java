@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
 public class Token {
 
     @Id
@@ -23,10 +22,10 @@ public class Token {
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
     private LocalDateTime confirmedAt;
+    private LocalDateTime validatedAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
 
 }
