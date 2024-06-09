@@ -5,8 +5,11 @@ import com.anthony.biblioteca_virtual.User.TokenRepository;
 import com.anthony.biblioteca_virtual.User.User;
 import com.anthony.biblioteca_virtual.User.UserRepository;
 import com.anthony.biblioteca_virtual.email.EmailService;
+import com.anthony.biblioteca_virtual.email.EmailTemplateName;
 import com.anthony.biblioteca_virtual.role.RoleRepository;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +27,10 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final EmailService emailService;
 
-    public void register(RegistrationRequest request) {
+    @Value("${application.mailing.frontend.activation-url}")
+    private String activationUrl;
+
+    public void register(RegistrationRequest request) throws MessagingException {
         var userRole = roleRepository.findByName("USER").orElseThrow(() -> new IllegalStateException("User role not found"));
         var user = User.builder()
                 .firstName(request.getFirstName())
@@ -39,12 +45,19 @@ public class AuthenticationService {
         sendValidationEmail(user);
     }
 
-    private void sendValidationEmail(User user) {
+    private void sendValidationEmail(User user) throws MessagingException {
         var newToken = generateAndSaveActivationToken(user);
-
+        emailService.sendEmail(
+                user.getEmail(),
+                user.fullName(),
+                EmailTemplateName.ACTIVATE_ACCOUNT,
+                activationUrl,
+                newToken,
+                "Account activation"
+        );
     }
 
-    private Object generateAndSaveActivationToken(User user) {
+    private String generateAndSaveActivationToken(User user) {
         String generatedToken = generateActivationCode(6);
         var token = Token.builder()
                 .token(generatedToken)

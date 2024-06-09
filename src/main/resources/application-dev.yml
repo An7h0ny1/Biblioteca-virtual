@@ -1,12 +1,12 @@
 spring:
     datasource:
-        url: jdbc:mysql://mysql-bv:3306/bv?serverTimezone=UTC
+        url: jdbc:mysql://localhost:3306/bv?useSSL=false
         username: root
         password:
         driver-class-name: com.mysql.cj.jdbc.Driver
     jpa:
       hibernate:
-        ddl-auto: update
+        ddl-auto: create-drop
       show-sql: false
       properties:
         hibernate:
@@ -34,3 +34,8 @@ application:
     jwt:
       secret-key: asd
       expiration: 8640000
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate/
+server:
+  port: 8080
