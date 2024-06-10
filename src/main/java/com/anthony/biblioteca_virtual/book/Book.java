@@ -1,7 +1,11 @@
 package com.anthony.biblioteca_virtual.book;
 
+import com.anthony.biblioteca_virtual.User.User;
 import com.anthony.biblioteca_virtual.common.BaseEntity;
+import com.anthony.biblioteca_virtual.feedback.FeedBack;
+import com.anthony.biblioteca_virtual.history.BookTransactionHistory;
 import jakarta.persistence.*;
+import jdk.dynalink.linker.LinkerServices;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +18,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Getter
 @Setter
 @SuperBuilder
@@ -31,4 +37,10 @@ public class Book  extends BaseEntity {
     private boolean archived;
     private boolean shareable;
 
+
+    @OneToMany(targetEntity = FeedBack.class, mappedBy = "book")
+    private List<FeedBack> feedbacks;
+
+    @OneToMany(targetEntity = BookTransactionHistory.class, mappedBy = "book")
+    private List<BookTransactionHistory> bookTransactionHistories;
 }

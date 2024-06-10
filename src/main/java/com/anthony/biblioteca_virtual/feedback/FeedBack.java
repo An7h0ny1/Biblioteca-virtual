@@ -1,5 +1,6 @@
 package com.anthony.biblioteca_virtual.feedback;
 
+import com.anthony.biblioteca_virtual.book.Book;
 import com.anthony.biblioteca_virtual.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,5 +27,9 @@ public class FeedBack  extends BaseEntity {
     private Double rating; // 1 to 5 stars
 
     private String comment;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
 }

@@ -1,5 +1,7 @@
 package com.anthony.biblioteca_virtual.User;
 
+import com.anthony.biblioteca_virtual.book.Book;
+import com.anthony.biblioteca_virtual.history.BookTransactionHistory;
 import com.anthony.biblioteca_virtual.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -48,6 +50,10 @@ public class User implements UserDetails, Principal {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
+
+
+    @OneToMany(targetEntity = BookTransactionHistory.class, mappedBy = "user")
+    private List<BookTransactionHistory> bookTransactionHistories;
 
 
     @CreatedDate
