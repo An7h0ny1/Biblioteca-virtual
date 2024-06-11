@@ -52,6 +52,9 @@ public class User implements UserDetails, Principal {
     private List<Role> roles;
 
 
+    @OneToMany(targetEntity = Book.class, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Book> books;
+
     @OneToMany(targetEntity = BookTransactionHistory.class, mappedBy = "user")
     private List<BookTransactionHistory> bookTransactionHistories;
 
