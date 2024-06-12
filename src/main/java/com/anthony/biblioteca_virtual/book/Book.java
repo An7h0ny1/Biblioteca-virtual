@@ -51,10 +51,16 @@ public class Book  extends BaseEntity {
 
     @Transient
     public double getRating() {
-        if(feedbacks == null || feedbacks.isEmpty()) {
-            return 0;
+        if (feedbacks == null || feedbacks.isEmpty()) {
+            return 0.0;
         }
-        return feedbacks.stream().mapToDouble(FeedBack::getRating).average().orElse(0);
+        var rating = this.feedbacks.stream()
+                .mapToDouble(FeedBack::getRating)
+                .average()
+                .orElse(0.0);
+
+        double roundRating = Math.round(rating * 10.0) / 10.0;
+        return roundRating;
     }
 
 

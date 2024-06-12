@@ -17,7 +17,7 @@ public class BookResponse {
     private Boolean shareable;
     private  String owner;
     private  byte[] bookCover;
-    private double archived;
+    private Boolean archived;
     private double rating;
 
 }
