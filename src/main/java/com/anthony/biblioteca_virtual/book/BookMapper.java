@@ -1,5 +1,6 @@
 package com.anthony.biblioteca_virtual.book;
 
+import com.anthony.biblioteca_virtual.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +30,19 @@ public class BookMapper {
                 .rating(book.getRating())
                 .owner(book.getOwner().fullName())
                 //.bookCover(book.getBookCover())
+                .build();
+        return build;
+    }
+
+    public BorrowedBookResponse toBorrowedBookresponse(BookTransactionHistory bookTransactionHistory) {
+        BorrowedBookResponse build = BorrowedBookResponse.builder()
+                .id(bookTransactionHistory.getBook().getId())
+                .title(bookTransactionHistory.getBook().getTitle())
+                .author(bookTransactionHistory.getBook().getAuthor())
+                .isbn(bookTransactionHistory.getBook().getIsbn())
+                .returned(bookTransactionHistory.isReturned())
+                .returnApproved(bookTransactionHistory.isReturnApproved())
+                .rating(bookTransactionHistory.getBook().getRating())
                 .build();
         return build;
     }
