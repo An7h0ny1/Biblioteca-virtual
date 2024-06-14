@@ -2,6 +2,7 @@ package com.anthony.biblioteca_virtual.book;
 
 import com.anthony.biblioteca_virtual.User.User;
 import com.anthony.biblioteca_virtual.common.PageResponse;
+import com.anthony.biblioteca_virtual.exception.OperationNotPermittedException;
 import com.anthony.biblioteca_virtual.history.BookTransactionHistory;
 import com.anthony.biblioteca_virtual.history.BookTransactionnHistoryRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -115,11 +117,23 @@ public class BookService {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Book not found with he ID: " + id));
         User user = ((User) connectedUser.getPrincipal());
-        if (user.getId().equals(book.getOwner().getId())) {
-            book.setShareable(!book.isShareable());
-            bookRepository.save(book);
-            return book.isShareable() ? 1 : 0;
+        if (!Objects.equals(book.getOwner().getId(),user.getId())) {
+            throw new OperationNotPermittedException("You cannot update others books shareable status");
         }
-        return 0;
+        book.setShareable(!book.isShareable());
+        bookRepository.save(book);
+        return id;
+    }
+
+    public Integer updateArchivedStatus(Integer id, Authentication connectedUser) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found with he ID: " + id));
+        User user = ((User) connectedUser.getPrincipal());
+        if (!Objects.equals(book.getOwner().getId(),user.getId())) {
+            throw new OperationNotPermittedException("You cannot update others books archived status");
+        }
+        book.setArchived(!book.isArchived());
+        bookRepository.save(book);
+        return id;
     }
 }

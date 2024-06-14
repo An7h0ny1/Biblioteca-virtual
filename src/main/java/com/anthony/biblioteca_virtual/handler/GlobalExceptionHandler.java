@@ -1,5 +1,6 @@
 package com.anthony.biblioteca_virtual.handler;
 
+import com.anthony.biblioteca_virtual.exception.OperationNotPermittedException;
 import jakarta.mail.MessagingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +68,16 @@ public class GlobalExceptionHandler {
 
         e.printStackTrace();
         return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ExceptionResponse.builder()
+                .businessErrorDescription("Internal server error")
+                .error(e.getMessage())
+                .build());
+    }
+
+    @ExceptionHandler(OperationNotPermittedException.class)
+    public ResponseEntity<ExceptionResponse> handleException(OperationNotPermittedException e) {
+
+        e.printStackTrace();
+        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionResponse.builder()
                 .businessErrorDescription("Internal server error")
                 .error(e.getMessage())
                 .build());
