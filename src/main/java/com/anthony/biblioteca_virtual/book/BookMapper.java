@@ -29,7 +29,7 @@ public class BookMapper {
                 .archived(book.isArchived())
                 .rating(book.getRating())
                 .owner(book.getOwner().fullName())
-                //.bookCover(book.getBookCover())
+                .bookCover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
         return build;
     }
