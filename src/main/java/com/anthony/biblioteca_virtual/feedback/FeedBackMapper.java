@@ -2,6 +2,8 @@ package com.anthony.biblioteca_virtual.feedback;
 
 import com.anthony.biblioteca_virtual.book.Book;
 
+import java.util.Objects;
+
 public class FeedBackMapper {
     public FeedBack toFeedBack(FeedBackRequest request) {
 
@@ -13,6 +15,14 @@ public class FeedBackMapper {
                         .shareable(true)
                         .archived(false)
                         .build())
+                .build();
+    }
+
+    public Object toFeedBackResponse(FeedBack feedBack, Integer id) {
+        return FeedBackResponse.builder()
+                .rating(feedBack.getRating())
+                .comment(feedBack.getComment())
+                .ownFeedback(Objects.equals(feedBack.getCreatedBy(), id))
                 .build();
     }
 }
