@@ -52,7 +52,7 @@ public class User implements UserDetails, Principal {
     private List<Role> roles;
 
 
-    @OneToMany(targetEntity = Book.class, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(targetEntity = Book.class, fetch = FetchType.LAZY, mappedBy = "owner")
     private List<Book> books;
 
     @OneToMany(targetEntity = BookTransactionHistory.class, mappedBy = "user")

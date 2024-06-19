@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public interface BookTransactionHistoryRepository extends JpaRepository<BookTran
             AND transaction.returned = false
             AND transaction.returnApproved = false
             """)
-    Optional<BookTransactionHistory> findByBookIdAndUserId(Integer bookid, Integer userid);
+    Optional<BookTransactionHistory> findByBookIdAndUserId(@Param("bookid") Integer bookid, @Param("userid") Integer userid);
 
     @Query("""
             SELECT transaction 
@@ -47,5 +48,5 @@ public interface BookTransactionHistoryRepository extends JpaRepository<BookTran
             AND transaction.returned = true
             AND transaction.returnApproved = false
             """)
-    Optional<BookTransactionHistory> findByBookIdAndOwnerId(Integer bookid, Integer id);
+    Optional<BookTransactionHistory> findByBookIdAndOwnerId(@Param("bookid") Integer bookid,@Param("userid") Integer id);
 }
