@@ -1,0 +1,16 @@
+<div class="container-fluid card login-container">
+  <h3 class="text-center">Iniciar sesión</h3>
+  <hr>
+  <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length > 0">
+    <p *ngFor="let msg of errorMsg">{{msg}}</p>
+  </div>
+  <div class="mb-3">
+    <label for="login" class="form-label">Correo electronico</label>
+    <input type="email" class="form-control" id="login" name="email" [(ngModel)]="authRequest.email">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Contraseña</label>
+    <input type="password" class="form-control" id="password" name="password" [(ngModel)]="authRequest.password">
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="login()">Iniciar sesión</button>
+</div>
