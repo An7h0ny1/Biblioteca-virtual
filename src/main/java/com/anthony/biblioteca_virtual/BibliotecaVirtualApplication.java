@@ -23,7 +23,7 @@ public class BibliotecaVirtualApplication {
 		return args -> {
 			if(roleRepository.findByName("USER").isEmpty()) {
 				roleRepository.save(Role.builder().name("USER").build());
-				//ASDASD
+				//ASDASDasdfasdf
 			}
 		};
 	}
