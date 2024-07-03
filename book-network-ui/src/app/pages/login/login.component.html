@@ -12,5 +12,17 @@
     <label for="password" class="form-label">Contraseña</label>
     <input type="password" class="form-control" id="password" name="password" [(ngModel)]="authRequest.password">
   </div>
-  <button type="submit" class="btn btn-primary" (click)="login()">Iniciar sesión</button>
+  <div class="d-flex justify-content-between mb-3">
+    <button (click)="login()" type="button" class="btn btn-primary">
+      <em class="fas fa-sign-in-alt">&nbsp;
+        Iniciar sesión
+      </em>
+    </button>
+    <div>
+      No tienes una cuenta? &nbsp;
+      <button (click)="register()" type="button" class="btn btn-link">
+          Registrar
+      </button>
+    </div>
+  </div>
 </div>
