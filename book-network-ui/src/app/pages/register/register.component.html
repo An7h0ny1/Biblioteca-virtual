@@ -1,0 +1,37 @@
+<div class="container-fluid card login-container">
+    <h3 class="text-center">Crea una cuenta</h3>
+    <hr>
+    <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length > 0">
+      <p *ngFor="let msg of errorMsg">{{msg}}</p>
+    </div>
+    <div class="mb-3">
+      <label for="firstname" class="form-label">Primer Nombre</label>
+      <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="registerRequest.firstName">
+    </div>
+    <div class="mb-3">
+      <label for="lastname" class="form-label">Primer Apellido</label>
+      <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="registerRequest.lastName">
+    </div>
+    <div class="mb-3">
+        <label for="login" class="form-label">Correo electronico</label>
+        <input type="email" class="form-control" id="login" name="email" [(ngModel)]="registerRequest.email">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="registerRequest.password">
+      </div>
+    <div class="d-flex justify-content-between mb-3">
+      <button (click)="register()" type="button" class="btn btn-primary">
+        <em class="fas fa-sign-in-alt">&nbsp;
+          Crea una cuenta
+        </em>
+      </button>
+      <div>
+        Ya tienes una cuenta? &nbsp;
+        <button (click)="login()" type="button" class="btn btn-link">
+            Login
+        </button>
+      </div>
+    </div>
+  </div>
+  
