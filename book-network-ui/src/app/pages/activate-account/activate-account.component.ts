@@ -32,8 +32,9 @@ export class ActivateAccountComponent {
       token
     }).subscribe({
       next:(): void =>{
-        this.message = 'Account activated successfully\n';
+        this.message = 'Cuenta activada correctamente\n';
         this.submitted = true;
+        this.isOkay = true;
       },
       error: (): void  =>{
         this.message = 'Token ha expirado o es invalido';
