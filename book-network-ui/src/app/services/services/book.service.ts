@@ -36,6 +36,7 @@ import { updateShareableStatus } from '../fn/book/update-shareable-status';
 import { UpdateShareableStatus$Params } from '../fn/book/update-shareable-status';
 import { uploadBookCoverPicture } from '../fn/book/upload-book-cover-picture';
 import { UploadBookCoverPicture$Params } from '../fn/book/upload-book-cover-picture';
+import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class BookService extends BaseService {
@@ -232,7 +233,12 @@ export class BookService extends BaseService {
    * This method doesn't expect any request body.
    */
   findAllBooks$Response(params?: FindAllBooks$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseBookResponse>> {
-    return findAllBooks(this.http, this.rootUrl, params, context);
+    console.log('Calling findAllBooks with params:', params);
+    return findAllBooks(this.http, this.rootUrl, params, context).pipe(
+      tap(response => {
+        console.log('Received response:', response);
+      })
+    );
   }
 
   /**
@@ -242,8 +248,12 @@ export class BookService extends BaseService {
    * This method doesn't expect any request body.
    */
   findAllBooks(params?: FindAllBooks$Params, context?: HttpContext): Observable<PageResponseBookResponse> {
+    console.log('Fetching books with params:', params);
     return this.findAllBooks$Response(params, context).pipe(
-      map((r: StrictHttpResponse<PageResponseBookResponse>): PageResponseBookResponse => r.body)
+      map((r: StrictHttpResponse<PageResponseBookResponse>): PageResponseBookResponse =>{
+        console.log('Response:', r.body);
+        return r.body;
+      })
     );
   }
 
