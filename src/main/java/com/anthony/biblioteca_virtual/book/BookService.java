@@ -44,6 +44,7 @@ public class BookService {
 
     public PageResponse<BookResponse> findAllBooks(Integer page, Integer size, Authentication connectedUser) {
         User user = ((User) connectedUser.getPrincipal());
+        Integer userId = user.getId();
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
         Page<Book> books = bookRepository.findAllDisplayableBooks(pageable, user.getId());
 
@@ -144,27 +145,40 @@ public class BookService {
     public Integer borrowBook(Integer id, Authentication connectedUser) {
 
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found with he ID: " + id));
-        if(book.isArchived() ||!book.isShareable()) {
-            throw new OperationNotPermittedException("The requested book is not shareable or archived " + id);
+                .orElseThrow(() -> new EntityNotFoundException("Book not found with the ID: " + id));
+
+        // Verifica si el libro está archivado
+        if(book.isArchived()) {
+            throw new OperationNotPermittedException("The requested book is archived and cannot be borrowed. Book ID: " + id);
         }
+
+        // Verifica si el libro es compartible
+        if(!book.isShareable()) {
+            throw new OperationNotPermittedException("The requested book is not shareable");
+        }
+
         User user = ((User) connectedUser.getPrincipal());
-        if (Objects.equals(book.getOwner().getId(),user.getId())) {
-            throw new OperationNotPermittedException("You cannot borrow your own book ");
+
+        if (Objects.equals(book.getOwner().getId(), user.getId())) {
+            throw new OperationNotPermittedException("You cannot borrow your own book" + id);
         }
 
         final boolean isBookAlreadyBorrowed = bookTransactionHistoryRepository.isBookAlreadyBorrowedByUser(id, user.getId());
+
         if(isBookAlreadyBorrowed) {
-            throw new OperationNotPermittedException("The requested book is already borrowed " + id);
+            throw new OperationNotPermittedException("The requested book is already borrowed" + id);
         }
+
         BookTransactionHistory bookTransactionHistory = BookTransactionHistory.builder()
                 .user(user)
                 .book(book)
                 .returned(false)
                 .returnApproved(false)
                 .build();
+
         return bookTransactionHistoryRepository.save(bookTransactionHistory).getId();
     }
+
 
     public Integer returnBorrowBook(Integer bookid, Authentication connectedUser) {
         Book book = bookRepository.findById(bookid)

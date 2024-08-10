@@ -13,6 +13,7 @@ export class BookListComponent implements OnInit {
   bookResponse: PageResponseBookResponse = {};
   page = 0; size = 2; 
   message = ''; level = 'success';
+  pages: any = [];
 
   constructor(
     private bookService: BookService,
@@ -30,14 +31,9 @@ export class BookListComponent implements OnInit {
     this.bookService.findAllBooks({
       page: this.page,
       size: this.size
-    }).subscribe({
-      next: (books: PageResponseBookResponse): void => {
-        console.log('Books fetched successfully:', books);
+    }) .subscribe({
+      next: (books) => {
         this.bookResponse = books;
-        console.log('Book response assigned to component:', this.bookResponse);
-      },
-      error: (err) => {
-        console.error('Error fetching books:', err);
       }
     });
   }
