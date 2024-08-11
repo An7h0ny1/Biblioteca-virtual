@@ -6,7 +6,7 @@ import { MyBooksComponent } from './pages/my-books/my-books.component';
 
 const routes: Routes = [
   {
-    path: 'books',
+    path: '',
     component: MainComponent,
     children: [
       {
@@ -14,8 +14,8 @@ const routes: Routes = [
         component: BookListComponent
       },
       {
-        path: 'my-books',
-        component: MyBooksComponent
+          path: 'my-books',
+          component: MyBooksComponent,
       }
 
     ]
@@ -26,4 +26,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class BookRoutingModule { }
+export class BookRoutingModule {
+ }
