@@ -7,19 +7,25 @@ import { BookListComponent } from './pages/book-list/book-list.component';
 import { BookCardComponent } from "./components/book-card/book-card.component";
 import { RatingComponent } from './components/rating/rating.component';
 import { MenuComponent } from "./components/menu/menu.component";
+import { MyBooksComponent } from './pages/my-books/my-books.component';
+import { FormsModule } from '@angular/forms';
+import { ManageBookComponent } from './pages/manage-book/manage-book.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
     BookListComponent,
-    MenuComponent
+    MenuComponent,
+    MyBooksComponent,
+    ManageBookComponent
   ],
   imports: [
     CommonModule,
     BookRoutingModule,
     BookCardComponent,
-    RatingComponent
+    RatingComponent,
+    FormsModule
 ]
 })
 export class BookModule { }
