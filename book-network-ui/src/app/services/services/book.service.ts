@@ -30,8 +30,8 @@ import { PageResponseBookResponse } from '../models/page-response-book-response'
 import { PageResponseBorrowedBookResponse } from '../models/page-response-borrowed-book-response';
 import { returnBorrowBook } from '../fn/book/return-borrow-book';
 import { ReturnBorrowBook$Params } from '../fn/book/return-borrow-book';
-import { updateArachivedStatus } from '../fn/book/update-arachived-status';
-import { UpdateArachivedStatus$Params } from '../fn/book/update-arachived-status';
+import { updateArchivedStatus } from '../fn/book/update-arachived-status';
+import { UpdateArchivedStatus$Params } from '../fn/book/update-arachived-status';
 import { updateShareableStatus } from '../fn/book/update-shareable-status';
 import { UpdateShareableStatus$Params } from '../fn/book/update-shareable-status';
 import { uploadBookCoverPicture } from '../fn/book/upload-book-cover-picture';
@@ -198,27 +198,27 @@ export class BookService extends BaseService {
     );
   }
 
-  /** Path part for operation `updateArachivedStatus()` */
-  static readonly UpdateArachivedStatusPath = '/books/arachived/{id}';
+  /** Path part for operation `updateArchivedStatus()` */
+  static readonly UpdateArchivedStatusPath = '/books/archived/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `updateArachivedStatus()` instead.
+   * To access only the response body, use `updateArchivedStatus()` instead.
    *
    * This method doesn't expect any request body.
    */
-  updateArachivedStatus$Response(params: UpdateArachivedStatus$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-    return updateArachivedStatus(this.http, this.rootUrl, params, context);
+  updateArchivedStatus$Response(params: UpdateArchivedStatus$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+    return updateArchivedStatus(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `updateArachivedStatus$Response()` instead.
+   * To access the full response (for headers, for example), `updateArchivedStatus$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  updateArachivedStatus(params: UpdateArachivedStatus$Params, context?: HttpContext): Observable<number> {
-    return this.updateArachivedStatus$Response(params, context).pipe(
+  updateArchivedStatus(params: UpdateArchivedStatus$Params, context?: HttpContext): Observable<number> {
+    return this.updateArchivedStatus$Response(params, context).pipe(
       map((r: StrictHttpResponse<number>): number => r.body)
     );
   }

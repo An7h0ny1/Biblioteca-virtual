@@ -7,12 +7,12 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface UpdateArachivedStatus$Params {
+export interface UpdateArchivedStatus$Params {
   id: number;
 }
 
-export function updateArachivedStatus(http: HttpClient, rootUrl: string, params: UpdateArachivedStatus$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-  const rb = new RequestBuilder(rootUrl, updateArachivedStatus.PATH, 'patch');
+export function updateArchivedStatus(http: HttpClient, rootUrl: string, params: UpdateArchivedStatus$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+  const rb = new RequestBuilder(rootUrl, updateArchivedStatus.PATH, 'patch');
   if (params) {
     rb.path('id', params.id, {});
   }
@@ -27,4 +27,4 @@ export function updateArachivedStatus(http: HttpClient, rootUrl: string, params:
   );
 }
 
-updateArachivedStatus.PATH = '/books/arachived/{id}';
+updateArchivedStatus.PATH = '/books/archived/{id}';

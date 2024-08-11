@@ -61,7 +61,7 @@ public class BookController {
     }
 
     @PatchMapping("/archived/{id}")
-    public ResponseEntity<Integer> updateArachivedStatus(@PathVariable Integer id, Authentication connectedUser) {
+    public ResponseEntity<Integer> updateArchivedStatus(@PathVariable Integer id, Authentication connectedUser) {
         return ResponseEntity.ok(service.updateArchivedStatus(id, connectedUser));
     }
 
@@ -71,18 +71,18 @@ public class BookController {
     }
 
     @PatchMapping("/borrow/return/{id}")
-    public ResponseEntity<Integer> returnBorrowBook(@PathVariable Integer bookid, Authentication connectedUser) {
-        return ResponseEntity.ok(service.returnBorrowBook(bookid, connectedUser));
+    public ResponseEntity<Integer> returnBorrowBook(@PathVariable Integer bookId, Authentication connectedUser) {
+        return ResponseEntity.ok(service.returnBorrowBook(bookId, connectedUser));
     }
 
     @PatchMapping("/borrow/return/approved/{id}")
-    public ResponseEntity<Integer> approveReturnBorrowBook(@PathVariable Integer bookid, Authentication connectedUser) {
-        return ResponseEntity.ok(service.approveReturnBorrowBook(bookid, connectedUser));
+    public ResponseEntity<Integer> approveReturnBorrowBook(@PathVariable Integer bookId, Authentication connectedUser) {
+        return ResponseEntity.ok(service.approveReturnBorrowBook(bookId, connectedUser));
     }
 
-    @PostMapping(value = "cover/{id}", consumes = "multipart/form-data")
-    public ResponseEntity<?> uploadBookCoverPicture(@PathVariable Integer bookid, @Parameter() @RequestPart("file") MultipartFile MultipartFile, Authentication connectedUser) {
-        service.uploadBookCoverPicture(bookid, MultipartFile, connectedUser);
+    @PostMapping(value = "cover/{bookId}", consumes = "multipart/form-data")
+    public ResponseEntity<?> uploadBookCoverPicture(@PathVariable Integer bookId, @Parameter() @RequestPart("file") MultipartFile MultipartFile, Authentication connectedUser) {
+        service.uploadBookCoverPicture(bookId, MultipartFile, connectedUser);
         return ResponseEntity.accepted().build();
     }
 }

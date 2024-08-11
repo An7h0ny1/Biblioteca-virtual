@@ -8,6 +8,7 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface UploadBookCoverPicture$Params {
+  bookId: number;
       body?: {
 'file': Blob;
 }
@@ -17,6 +18,7 @@ export function uploadBookCoverPicture(http: HttpClient, rootUrl: string, params
 }>> {
   const rb = new RequestBuilder(rootUrl, uploadBookCoverPicture.PATH, 'post');
   if (params) {
+    rb.path('bookId', params.bookId, {});
     rb.body(params.body, 'multipart/form-data');
   }
 
@@ -31,4 +33,4 @@ export function uploadBookCoverPicture(http: HttpClient, rootUrl: string, params
   );
 }
 
-uploadBookCoverPicture.PATH = '/books/cover/{id}';
+uploadBookCoverPicture.PATH = '/books/cover/{bookId}';

@@ -15,26 +15,26 @@
             <form class="row g-3">
                 <div class="col-12">
                     <label for="title" class="form-label">Titulo</label>
-                    <input [(ngModel)]="bookRequest.title" type="text" class="form-control" id="title" placeholder="titulo del libro">
+                    <input [(ngModel)]="bookRequest.title" name="title" type="text" class="form-control" id="title" placeholder="titulo del libro">
                 </div>
                 <div class="col-6">
                     <label for="author" class="form-label">Nombre del Autor</label>
-                    <input [(ngModel)]="bookRequest.author" type="text" class="form-control" id="author" placeholder="Nombre del autor">
+                    <input [(ngModel)]="bookRequest.author" name="author" type="text" class="form-control" id="author" placeholder="Nombre del autor">
                 </div>
                 <div class="col-6">
                     <label for="isbn" class="form-label">ISBN</label>
-                    <input [(ngModel)]="bookRequest.isbn" type="text" class="form-control" id="isbn" placeholder="isbn del libro">
+                    <input [(ngModel)]="bookRequest.isbn" name="isbn" type="text" class="form-control" id="isbn" placeholder="isbn del libro">
                 </div>
                 <div class="col-12">
                     <label for="synopsis" class="form-label">Synopsis</label>
-                    <textarea [(ngModel)]="bookRequest.synopsis" rows="4" class="form-control" id="synopsis" placeholder="synopsis del libro"></textarea>
+                    <textarea [(ngModel)]="bookRequest.synopsis" name="synopsis" rows="4" class="form-control" id="synopsis" placeholder="synopsis del libro"></textarea>
                 </div>
                 <div class="col-12">
-                    <input [(ngModel)]="bookRequest.shareable" class="form-check-input" id="shareme" type="checkbox">
+                    <input [(ngModel)]="bookRequest.shareable" name="shareme" class="form-check-input" id="shareme" type="checkbox">
                     <label for="shareme" class="form-check-label">Share me</label>
                 </div>
                 <div class="d-flex justify-content-end gap-2 col-12">
-                    <button type="submit" class="btn btn-outline-primary">
+                    <button (click)="saveBook()" type="submit" class="btn btn-outline-primary">
                         <i class="fas fa-save"></i>&nbsp;Guardar
                     </button>
                     <a routerLink="/books/my-books" class="btn btn-link text-danger">
