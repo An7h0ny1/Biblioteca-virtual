@@ -25,4 +25,4 @@ export function returnBorrowBook(http: HttpClient, rootUrl: string, params?: Ret
   );
 }
 
-returnBorrowBook.PATH = '/books/borrow/return/{id}';
+returnBorrowBook.PATH = '/books/borrow/return/{bookId}';

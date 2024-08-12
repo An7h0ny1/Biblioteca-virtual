@@ -70,12 +70,12 @@ public class BookController {
         return ResponseEntity.ok(service.borrowBook(id, connectedUser));
     }
 
-    @PatchMapping("/borrow/return/{id}")
+    @PatchMapping("/borrow/return/{bookId}")
     public ResponseEntity<Integer> returnBorrowBook(@PathVariable Integer bookId, Authentication connectedUser) {
         return ResponseEntity.ok(service.returnBorrowBook(bookId, connectedUser));
     }
 
-    @PatchMapping("/borrow/return/approved/{id}")
+    @PatchMapping("/borrow/return/approved/{bookId}")
     public ResponseEntity<Integer> approveReturnBorrowBook(@PathVariable Integer bookId, Authentication connectedUser) {
         return ResponseEntity.ok(service.approveReturnBorrowBook(bookId, connectedUser));
     }
