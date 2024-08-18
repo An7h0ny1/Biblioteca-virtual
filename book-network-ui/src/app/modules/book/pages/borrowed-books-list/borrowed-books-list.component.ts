@@ -78,7 +78,7 @@ export class BorrowedBooksListComponent implements OnInit{
             this.findAllBorrowedBoooks();
         }
     });
-}
+  }
 
 
 

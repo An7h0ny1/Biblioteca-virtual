@@ -8,11 +8,13 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface ReturnBorrowBook$Params {
+  bookId: number;
 }
 
 export function returnBorrowBook(http: HttpClient, rootUrl: string, params?: ReturnBorrowBook$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
   const rb = new RequestBuilder(rootUrl, returnBorrowBook.PATH, 'patch');
   if (params) {
+    rb.path('bookId', params.bookId, {});
   }
 
   return http.request(
