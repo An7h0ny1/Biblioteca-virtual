@@ -1,3 +1,8 @@
+<h2>My return books</h2>
+<hr>
+<div *ngIf="message" class="alert" [class.alert-success]="level === 'success'" [class.alert-danger]="level === 'error'">
+    {{ message }}
+</div> 
 <div>
     <table class="table">
         <thead>

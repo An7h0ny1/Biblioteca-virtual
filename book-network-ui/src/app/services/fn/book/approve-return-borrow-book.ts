@@ -8,11 +8,13 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface ApproveReturnBorrowBook$Params {
+  bookId: number;
 }
 
 export function approveReturnBorrowBook(http: HttpClient, rootUrl: string, params?: ApproveReturnBorrowBook$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
   const rb = new RequestBuilder(rootUrl, approveReturnBorrowBook.PATH, 'patch');
   if (params) {
+    rb.path('bookId', params.bookId, {});
   }
 
   return http.request(

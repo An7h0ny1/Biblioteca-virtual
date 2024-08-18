@@ -10,6 +10,7 @@ import { BorrowedBookResponse, PageResponseBorrowedBookResponse } from '../../..
 export class ReturnBooksComponent {
 
   page = 0; size = 5;
+  message = ''; level = 'success';
 
   returnedBooks: PageResponseBorrowedBookResponse = {};
 
@@ -18,10 +19,10 @@ export class ReturnBooksComponent {
   }
 
   ngOnInit(): void {
-    this.findAllBorrowedBoooks();
+    this.findAllReturnedBooks();
   }
 
-  findAllBorrowedBoooks():void{
+  findAllReturnedBooks():void{
     this.bookService.findAllReturnedBooks({
       page: this.page,
       size: this.size
@@ -34,26 +35,26 @@ export class ReturnBooksComponent {
 
   gotToFirstPage():void{
     this.page = 0;
-    this.findAllBorrowedBoooks();
+    this.findAllReturnedBooks();
   }
 
   gotToPreviousPage():void{
     this.page--;
-    this.findAllBorrowedBoooks();
+    this.findAllReturnedBooks();
   }
   
   gotToPage(page: number): void{
     this.page = page;
-    this.findAllBorrowedBoooks();
+    this.findAllReturnedBooks();
   }
   gotToNextPage():void{
     this.page++;
-    this.findAllBorrowedBoooks();
+    this.findAllReturnedBooks();
   }
 
   gotToLastPage():void{
     this.page = this.returnedBooks.totalPages as number - 1;
-    this.findAllBorrowedBoooks();
+    this.findAllReturnedBooks();
   }
 
   get isLastPage(): boolean{
@@ -61,7 +62,20 @@ export class ReturnBooksComponent {
   }
 
   approveBookReturn(book: BorrowedBookResponse): void{
-    
+    if(!book.returned){
+      this.level = 'error';
+      this.message = 'The book is not yet returned';
+      return;
+    }
+    this.bookService.approveReturnBorrowBook({
+      'bookId': book.id as number
+    }).subscribe({
+      next: (): void => {
+        this.level = 'success';
+        this.message = 'Book return approved';
+        this.findAllReturnedBooks();
+      }
+    });
   }
 
 }

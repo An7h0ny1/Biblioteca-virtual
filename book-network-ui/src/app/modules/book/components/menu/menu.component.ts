@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  logout() {
+  logout():void {
     localStorage.removeItem('token');
     window.location.reload();
   }
