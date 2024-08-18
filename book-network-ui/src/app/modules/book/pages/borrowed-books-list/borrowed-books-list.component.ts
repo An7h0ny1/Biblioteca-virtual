@@ -34,6 +34,7 @@ export class BorrowedBooksListComponent implements OnInit{
       size: this.size
     }).subscribe({
       next: (resp: PageResponseBorrowedBookResponse): void =>{
+        console.log("holaa" , resp);  // Verificar la respuesta
         this.borrowedBooks = resp;
       }
     })

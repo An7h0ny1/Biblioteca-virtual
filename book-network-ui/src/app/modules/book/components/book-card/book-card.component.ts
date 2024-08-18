@@ -5,8 +5,6 @@ import { RatingComponent } from '../rating/rating.component';
 
 @Component({
   selector: 'app-book-card',
-  standalone: true,
-  imports: [CommonModule, RatingComponent],
   templateUrl: './book-card.component.html',
   styleUrl: './book-card.component.scss'
 })

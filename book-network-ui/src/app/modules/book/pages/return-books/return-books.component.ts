@@ -7,7 +7,7 @@ import { BorrowedBookResponse, PageResponseBorrowedBookResponse } from '../../..
   templateUrl: './return-books.component.html',
   styleUrl: './return-books.component.scss'
 })
-export class ReturnBooksComponent implements OnInit{
+export class ReturnBooksComponent {
 
   page = 0; size = 5;
 

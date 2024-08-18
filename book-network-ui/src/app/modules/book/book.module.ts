@@ -21,14 +21,14 @@ import { ReturnBooksComponent } from './pages/return-books/return-books.componen
     MenuComponent,
     MyBooksComponent,
     ManageBookComponent,
+    BookCardComponent,
+    RatingComponent,
     BorrowedBooksListComponent,
     ReturnBooksComponent
   ],
   imports: [
     CommonModule,
     BookRoutingModule,
-    BookCardComponent,
-    RatingComponent,
     FormsModule
 ]
 })
